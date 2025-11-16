@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ProductCard from './ProductCard'
 
 export default function TrendingGrid() {
   const [products, setProducts] = useState([])
@@ -31,17 +32,7 @@ export default function TrendingGrid() {
         </div>
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map(p => (
-            <article key={p.id} className="group border rounded-xl overflow-hidden bg-white hover:shadow-lg transition">
-              <div className="aspect-square bg-gray-100" style={{backgroundImage:`url(${p.media?.[0]?.url || ''})`, backgroundSize:'cover', backgroundPosition:'center'}} />
-              <div className="p-4">
-                <h3 className="font-medium line-clamp-1">{p.title}</h3>
-                <p className="mt-1 text-sm text-gray-600 line-clamp-2">{p.description}</p>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="font-semibold">${p.price?.target_price?.toFixed ? p.price.target_price.toFixed(2) : p.price?.target_price}</span>
-                  <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-800">{Math.round(p.trend_score)} Trend</span>
-                </div>
-              </div>
-            </article>
+            <ProductCard key={p.id} p={p} />
           ))}
         </div>
       </div>
